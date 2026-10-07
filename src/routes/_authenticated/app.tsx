@@ -8,9 +8,9 @@ import { SiteHeader } from "@/components/SiteHeader";
 export const Route = createFileRoute("/_authenticated/app")({
   head: () => ({
     meta: [
-      { title: "Dashboard — Flight Price Notifier" },
+      { title: "Dashboard — Flight Fare Finder" },
       { name: "description", content: "Your flight price tracking dashboard." },
-      { property: "og:title", content: "Dashboard — Flight Price Notifier" },
+      { property: "og:title", content: "Dashboard — Flight Fare Finder" },
       { property: "og:description", content: "Your flight price tracking dashboard." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

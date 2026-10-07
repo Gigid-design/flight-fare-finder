@@ -7,9 +7,9 @@ import { useReveal } from "@/hooks/use-reveal";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Flight Price Notifier — 機票降價通知" },
+      { title: "Flight Fare Finder — 機票降價通知" },
       { name: "description", content: "設定航線與目標價，機票降價就通知你。Set a route and a target price — we email you when the fare drops." },
-      { property: "og:title", content: "Flight Price Notifier — 機票降價通知" },
+      { property: "og:title", content: "Flight Fare Finder — 機票降價通知" },
       { property: "og:description", content: "Set a route and a target price — we email you when the fare drops." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -43,7 +43,7 @@ function Index() {
               TPE → NRT · HND · ICN
             </p>
             <h1 className="reveal text-gradient text-5xl font-extrabold tracking-tight sm:text-7xl">
-              Flight Price Notifier
+              Flight Fare Finder
             </h1>
             <p className="reveal mt-6 text-xl font-semibold sm:text-2xl">設定航線與目標價，機票降價就通知你</p>
             <p className="reveal mt-3 text-muted-foreground">
@@ -78,7 +78,7 @@ function Index() {
         </section>
       </main>
       <footer className="border-t border-border py-8 text-center text-sm text-muted-foreground">
-        © 2026 Flight Price Notifier
+        © 2026 Flight Fare Finder
       </footer>
     </div>
   );
