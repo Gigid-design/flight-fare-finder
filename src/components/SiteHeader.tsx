@@ -10,7 +10,7 @@ export function SiteHeader({ right }: { right?: ReactNode }) {
           <span className="grid h-8 w-8 place-items-center rounded-lg bg-primary text-primary-foreground shadow-glow">
             <Plane className="h-4 w-4" />
           </span>
-          Flight Price Notifier
+          Flight Fare Finder
         </Link>
         {right}
       </div>

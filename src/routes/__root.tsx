@@ -80,7 +80,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Flight Price Notifier" },
+      { title: "Flight Fare Finder" },
       { name: "description", content: "Set a route and a target price — we email you when the fare drops." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
