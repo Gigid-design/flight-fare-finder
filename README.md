@@ -28,10 +28,10 @@ bun run preview
 
 ## Environment
 
-Vite inlines these at build time (see `.env`):
+Backend is the project's own Supabase project (`bxjoqxhtlirlygaopwrt`). Vite inlines these at build time (see `.env`, template in `.env.example`):
 
-- `VITE_SUPABASE_URL`
-- `VITE_SUPABASE_PUBLISHABLE_KEY`
+- `VITE_SUPABASE_URL` — `https://bxjoqxhtlirlygaopwrt.supabase.co`
+- `VITE_SUPABASE_PUBLISHABLE_KEY` — the `sb_publishable_*` key (browser-safe, RLS-gated; this is Supabase's current name for the former anon key)
 - `VITE_SUPABASE_PROJECT_ID`
 
-Set the same variables in the Vercel project settings for production builds.
+Set `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` in the Vercel project's environment variables as well; the Vercel build does not read `.env` from the repo for secrets you'd rather keep out of git, and must match these values.

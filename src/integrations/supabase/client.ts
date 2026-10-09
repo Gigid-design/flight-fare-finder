@@ -1,6 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "./types";
-import { brokeredPreviewStorage } from "./previewAuthStorage";
 
 function isNewSupabaseApiKey(value: string): boolean {
   return value.startsWith("sb_publishable_") || value.startsWith("sb_secret_");
@@ -30,7 +29,8 @@ function createSupabaseFetch(supabaseKey: string): typeof fetch {
 }
 
 function createSupabaseClient() {
-  // Browser-only SPA: values are inlined by Vite at build time.
+  // Browser-only SPA: values are inlined by Vite at build time from VITE_* env vars.
+  // No hardcoded URLs or keys; see .env / .env.example.
   const SUPABASE_URL = import.meta.env["VITE_SUPABASE_URL"];
   const SUPABASE_PUBLISHABLE_KEY = import.meta.env["VITE_SUPABASE_PUBLISHABLE_KEY"];
 
@@ -49,7 +49,6 @@ function createSupabaseClient() {
       fetch: createSupabaseFetch(SUPABASE_PUBLISHABLE_KEY),
     },
     auth: {
-      storage: brokeredPreviewStorage(),
       persistSession: true,
       autoRefreshToken: true,
     },
