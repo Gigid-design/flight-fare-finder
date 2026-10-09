@@ -3,7 +3,6 @@ import { Link, Outlet, useRouteError } from "react-router";
 import { useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Toaster } from "@/components/ui/sonner";
-import { reportLovableError } from "../lib/lovable-error-reporting";
 
 const queryClient = new QueryClient();
 
@@ -32,9 +31,6 @@ export function NotFoundPage() {
 export function RootErrorBoundary() {
   const error = useRouteError();
   console.error(error);
-  useEffect(() => {
-    reportLovableError(error, { boundary: "react_router_root_error_boundary" });
-  }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
