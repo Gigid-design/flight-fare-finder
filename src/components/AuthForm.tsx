@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate } from "react-router";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -18,12 +18,22 @@ export function AuthForm({ mode }: { mode: "signin" | "signup" }) {
     e.preventDefault();
     setLoading(true);
     const { data, error } = isUp
-      ? await supabase.auth.signUp({ email, password, options: { emailRedirectTo: `${window.location.origin}/app` } })
+      ? await supabase.auth.signUp({
+          email,
+          password,
+          options: { emailRedirectTo: `${window.location.origin}/app` },
+        })
       : await supabase.auth.signInWithPassword({ email, password });
     setLoading(false);
-    if (error) { toast.error(error.message); return; }
-    if (!data.session) { toast.success("請到信箱確認帳號 Check your email to confirm."); return; }
-    navigate({ to: "/app", replace: true });
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+    if (!data.session) {
+      toast.success("請到信箱確認帳號 Check your email to confirm.");
+      return;
+    }
+    navigate("/app", { replace: true });
   }
 
   return (
@@ -37,11 +47,24 @@ export function AuthForm({ mode }: { mode: "signin" | "signup" }) {
             <form onSubmit={onSubmit} className="mt-6 space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+                <Input
+                  id="email"
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
-                <Input id="password" type="password" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} />
+                <Input
+                  id="password"
+                  type="password"
+                  required
+                  minLength={6}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </div>
               <Button type="submit" className="w-full shadow-glow" disabled={loading}>
                 {loading ? "…" : isUp ? "Sign up / 註冊" : "Sign in / 登入"}
@@ -49,7 +72,10 @@ export function AuthForm({ mode }: { mode: "signin" | "signup" }) {
             </form>
             <p className="mt-6 text-center text-sm text-muted-foreground">
               {isUp ? "已有帳號？" : "還沒有帳號？"}{" "}
-              <Link to={isUp ? "/signin" : "/signup"} className="font-medium text-primary hover:underline">
+              <Link
+                to={isUp ? "/signin" : "/signup"}
+                className="font-medium text-primary hover:underline"
+              >
                 {isUp ? "Sign in" : "Sign up"}
               </Link>
             </p>
