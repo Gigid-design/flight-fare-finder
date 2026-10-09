@@ -1,24 +1,37 @@
-# Pixel Perfect Pixels
+# Flight Fare Finder
 
-Implement exactly the screenshot and nothing else
+Set a route and a target price — we email you when the fare drops.
 
-This project was built with [Lovable](https://lovable.dev).
+Plain Vite + React single-page app with React Router (client-side routing) and Supabase auth. Builds to a static `dist/` folder suitable for Vercel or any static host.
 
-## Build with Lovable
+## Routes
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/c4c54fc2-9c47-44f8-ac40-86ffb1b67b1d).
+- `/` landing page
+- `/signin`, `/signup` auth
+- `/app` dashboard (requires a signed-in Supabase user; redirects to `/signin` otherwise)
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+Deep links resolve client-side: `vercel.json` rewrites every path to `index.html`.
 
 ## Development
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+```sh
+bun install   # or npm i
+bun run dev   # or npm run dev → http://localhost:8080
+```
+
+## Build
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+bun run build   # vite build → dist/
+bun run preview
 ```
+
+## Environment
+
+Vite inlines these at build time (see `.env`):
+
+- `VITE_SUPABASE_URL`
+- `VITE_SUPABASE_PUBLISHABLE_KEY`
+- `VITE_SUPABASE_PROJECT_ID`
+
+Set the same variables in the Vercel project settings for production builds.

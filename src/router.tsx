@@ -1,16 +1,30 @@
-import { QueryClient } from "@tanstack/react-query";
-import { createRouter } from "@tanstack/react-router";
-import { routeTree } from "./routeTree.gen";
+import { createBrowserRouter } from "react-router";
 
-export const getRouter = () => {
-  const queryClient = new QueryClient();
+import { RootLayout, RootErrorBoundary, NotFoundPage } from "./layouts/RootLayout";
+import { RequireAuth } from "./layouts/RequireAuth";
+import { IndexPage } from "./pages/Index";
+import { SignInPage } from "./pages/SignIn";
+import { SignUpPage } from "./pages/SignUp";
+import { AppPage } from "./pages/App";
 
-  const router = createRouter({
-    routeTree,
-    context: { queryClient },
-    scrollRestoration: true,
-    defaultPreloadStaleTime: 0,
-  });
+// Client-side route table. Static hosting serves index.html for every path
+// (see vercel.json), so deep links like /app resolve here in the browser.
+export const routes = [
+  {
+    path: "/",
+    Component: RootLayout,
+    ErrorBoundary: RootErrorBoundary,
+    children: [
+      { index: true, Component: IndexPage },
+      { path: "signin", Component: SignInPage },
+      { path: "signup", Component: SignUpPage },
+      {
+        Component: RequireAuth,
+        children: [{ path: "app", Component: AppPage }],
+      },
+      { path: "*", Component: NotFoundPage },
+    ],
+  },
+];
 
-  return router;
-};
+export const router = createBrowserRouter(routes);
